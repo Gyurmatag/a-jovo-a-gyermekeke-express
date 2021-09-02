@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 
 const feedRoutes = require('./routes/feed');
 
-const app = express();
+const index = express();
 
 dotEnv.config();
-app.use(bodyParser.json());
+index.use(bodyParser.json());
 
-app.use((req, res, next) => {
+index.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
         'Access-Control-Allow-Methods',
@@ -20,9 +20,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/feed', feedRoutes);
+index.use('/feed', feedRoutes);
 
-app.use((error, req, res, next) => {
+index.use((error, req, res, next) => {
     console.log(error);
     const status = error.statusCode || 500;
     const message = error.message;
@@ -36,6 +36,6 @@ mongoose
     )
     .then(_ => {
         console.log("App started")
-        app.listen(process.env.PORT);
+        index.listen(process.env.PORT);
     })
     .catch(err => console.log(err));
