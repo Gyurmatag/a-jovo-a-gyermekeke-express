@@ -16,7 +16,8 @@ exports.getNewsList = (req, res, next) => {
             totalItems = count;
             return News.find()
                 .skip((currentPage - 1) * perPage)
-                .limit(perPage);
+                .limit(perPage)
+                .sort({createdAt: 'descending'});
         })
         .then(news => {
             res.status(200).json({
