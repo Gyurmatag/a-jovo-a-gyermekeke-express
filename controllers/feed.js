@@ -7,8 +7,8 @@ const News = require('../models/news');
 const User = require('../models/user');
 
 exports.getNewsList = (req, res, next) => {
-    const currentPage = req.query.page || 1;
-    const perPage = 2;
+    const currentPage = +req.query.page || 1;
+    const perPage = +req.query.limit || 5;
     let totalItems;
     News.find()
         .countDocuments()
