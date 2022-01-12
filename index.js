@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const feedRoutes = require('./routes/feed');
+const applicationRoutes = require('./routes/application');
 
 const index = express();
 
@@ -21,6 +22,7 @@ index.use((req, res, next) => {
 });
 
 index.use('/feed', feedRoutes);
+index.use('/application', applicationRoutes);
 
 index.use((error, req, res, next) => {
     console.log(error);
